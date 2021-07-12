@@ -3,6 +3,9 @@ class Zodynas {
         this.selector = selector;
 
         this.DOM = null;
+        this.enZodisDOM = null;
+        this.ltZodisDOM = null;
+        this.btnSaveDOM = null;
 
         this.init();
     }
@@ -35,7 +38,7 @@ class Zodynas {
         <button class="btn cancel">Cancel</button>
     </form>`
     }
-    generateSavedTable() {
+    generateSavedTable(enZodis, ltZodis) {
         return `<h1>Užsaugota </h1>
         <table style="width:100%">
         <tr>
@@ -46,8 +49,8 @@ class Zodynas {
             </th>
         </tr>
         <tr>
-            <td>Dog</td>
-            <td>Suo</td>
+            <td>${enZodis}</td>
+            <td>${ltZodis}</td>
             <td class="action">
                 <button class="fa fa-pencil"></button>
                 <button class="fa fa-trash-o"></button>
@@ -62,9 +65,23 @@ class Zodynas {
         HTML += this.generateUpdateForm();
         HTML += this.generateSavedTable();
         this.DOM.innerHTML = HTML;
+
+        this.enZodisDOM = document.querySelector('.enZodis');
+        this.ltZodisDOM = document.querySelector('.ltZodis');
+        this.btnSaveDOM = document.querySelector('.save');
+        // console.log(this.enZodisDOM, this.ltZodisDOM, this.btnSaveDOM);
+
+
     }
     addEvents() {
+        this.btnSaveDOM.addEventListener('click', (e) => {
+            e.preventDefault();
+            const enZodis = this.enZodisDOM.value;
+            const ltZodis = this.ltZodisDOM.value;
+            console.log(enZodis, ltZodis);
+            this.generateSavedTable(enZodis, ltZodis);
 
+        })
 
     }
 
